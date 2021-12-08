@@ -29,10 +29,10 @@ class App extends Component {
 registerNewUser = async (user) => {
   console.log("User object from Register: ", user)
   try{
-      const response = await axios.post('https://localhost:44394/api/authentication', user);
+      const response = await axios.post('http://127.0.0.1:8000/api/auth/register/', user);
       console.log(response)
       this.loggedInUser = ({'userName': user.userName, 'password': user.password})
-      window.location = ('/Login')
+      // window.location = ('/Login')
 
   }
   catch(error) {
@@ -45,7 +45,7 @@ registerNewUser = async (user) => {
 loginUser = async (login) => {
   console.log("User object from login:", login)
   try {
-      let response = await axios.post('https://localhost:44394/api/authentication/login', login);
+      let response = await axios.post('http://127.0.0.1:8000/api/auth/login/', login);
       this.setState({
           user: response.data.token
       });
@@ -54,7 +54,7 @@ loginUser = async (login) => {
       });
       localStorage.setItem('token', response.data.token);
       
-      window.location = ('/Home')
+      // window.location = ('/Home')
 
   } catch (error) {
       alert('Invalid username or password')
